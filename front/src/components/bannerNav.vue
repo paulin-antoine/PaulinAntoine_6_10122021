@@ -1,8 +1,8 @@
 <template>
         <div class="icons-block">
-            <div class="icons"><router-link to="/wall"><fa id="news" icon="newspaper" size="2x" /></router-link></div>
-            <div class="icons"><router-link to="/profile"><fa id="user-icon" icon="user" size="2x" /></router-link></div>
-            <div v-on:click="logout" class="icons" id="logout-icon"><fa id="logout" icon="sign-out-alt" size="2x" /></div>
+            <div class="icons"><router-link to="/wall"><fa id="news" title="news" icon="newspaper" size="2x" /></router-link></div>
+            <div class="icons"><router-link to="/profile"><fa id="user-icon" title="profile" icon="user" size="2x" /></router-link></div>
+            <div v-on:click="logout" class="icons" id="logout-icon"><fa id="logout" title="Déconnexion" icon="sign-out-alt" size="2x" /></div>
         </div>
 </template>
 

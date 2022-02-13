@@ -9,4 +9,6 @@ router.get('/', auth, postCtrls.getPostsList);
 router.post('/:idPost', auth, postCtrls.incrementId);
 router.put('/:insertId', auth, multer, postCtrls.addPostImage);
 router.delete('/:idPost', auth, postCtrls.deletePost);
+router.get('/:idPost', auth, postCtrls.getLike);
+
 module.exports = router;

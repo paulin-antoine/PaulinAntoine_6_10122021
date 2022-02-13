@@ -130,3 +130,9 @@ exports.deletePost = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
+exports.getLike = (req, res, next) => {
+  const postId = req.params["idPost"];
+  database
+    .query(`SELECT * FROM crud.liked WHERE idPost=${postId}`)
+    .then((result) => res.status(200).json({ result: result[0][0]}))
+}

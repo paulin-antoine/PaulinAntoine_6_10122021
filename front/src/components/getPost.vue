@@ -23,7 +23,8 @@
             <div class="comment-like-zone">
                 <div class='icons-box'>
                     <div class="icon-comment-zone">
-                <a><fa  v-on:click="sendLike" icon="heart"  class="icon-comment" /></a>               
+                <a v-if="liked == 0"><fa v-on:click="sendLike" icon="heart"  class="icon-comment" /></a>
+                <a v-if="liked == 1"><fa v-on:click="sendLike" icon="heart" id="red-heart"  class="icon-comment" /></a>               
                 <span class="icon-comment">&nbsp;{{this.like}}</span>
                 </div>
                 <div class="icon-comment-zone">
@@ -62,6 +63,7 @@ import axios from 'axios'
         return {
         show: false,
         like: this.post.likes,
+        liked: "",
         comment: {
             message: "",
         },
@@ -75,6 +77,19 @@ import axios from 'axios'
          
   }
 },   methods: {
+        getlike: function() {
+            axios.get(`http://localhost:3000/api/post/${this.$props.post.idPost}`,
+            {
+             headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
+                              
+            }
+         }).then((data) => {
+             console.log(data.data.result.liked);
+                  this.liked = data.data.result.liked;         
+                    
+        }) .catch((error) => {console.log(error)})
+        },
        sendLike: function() {
            axios.post(`http://localhost:3000/api/post/${this.$props.post.idPost}`,
             {
@@ -86,8 +101,8 @@ import axios from 'axios'
                               
             }
          }).then(() => {
-                   location.reload();                
-                    
+             location.reload()
+                                
         }) .catch((error) => {if (error.response.status === 401) {
                   localStorage.clear();
                   this.$router.push('/');
@@ -170,6 +185,7 @@ import axios from 'axios'
 },
     mounted() {
         this.getCommentsList();
+        this.getlike();
     }
     }
 
@@ -291,7 +307,7 @@ import axios from 'axios'
         color: grey;
         background-color: white;
     }
-    #heart-2 {
+    #red-heart {
         color: red
     }
     .user-comment {
@@ -332,5 +348,8 @@ import axios from 'axios'
     }
     .icon-comment, .trash-2 {
         cursor: pointer;
+    }
+    .icon-comment:hover {
+        transform: scale(1.3);
     }
 </style>
