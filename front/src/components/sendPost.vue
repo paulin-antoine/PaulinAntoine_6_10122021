@@ -2,7 +2,7 @@
   <div id="forms">
     <form class="post-form">
       <label for="post-area" class="post-area"><p>Publiez quelque-chose</p></label><br/>
-      <textarea name="post-area" class="area" required v-model="post"></textarea>
+      <input name="post-area" class="area" required v-model="post">
       <br />
     </form>
     <form id="picture-form">
@@ -169,7 +169,7 @@ export default {
 .area {
   display: block;
   width: 100%;
-  height: 50px;
+  height: 25px;
   box-sizing: border-box;
   padding: 5px;
   border: solid grey 1px;
