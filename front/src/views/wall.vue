@@ -50,6 +50,7 @@ export default {
                         this.posts = data.data;
                         console.log(data.data);
                         
+                        
                     
                 })
               .catch((error) => {if (error.response.status === 401) {

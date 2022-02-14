@@ -22,10 +22,9 @@
             </div>
             <div class="comment-like-zone">
                 <div class='icons-box'>
-                    <div class="icon-comment-zone">
-                <a v-if="liked == 0"><fa v-on:click="sendLike" icon="heart"  class="icon-comment" /></a>
-                <a v-if="liked == 1"><fa v-on:click="sendLike" icon="heart" id="red-heart"  class="icon-comment" /></a>               
-                <span class="icon-comment">&nbsp;{{this.like}}</span>
+                    <div  class="icon-comment-zone">
+                <a> <fa v-on:click="sendLike" icon="heart" id="heart" class="icon-comment" /></a>              
+                <span class="icon-comment">&nbsp;{{this.likes}}</span>
                 </div>
                 <div class="icon-comment-zone">
                 {{numberOfComments}} <a v-on:click="show = !show"><fa icon="comment" class="icon-comment" /></a>
@@ -62,8 +61,7 @@ import axios from 'axios'
     data() {
         return {
         show: false,
-        like: this.post.likes,
-        liked: "",
+        likes: "",
         comment: {
             message: "",
         },
@@ -77,17 +75,16 @@ import axios from 'axios'
          
   }
 },   methods: {
-        getlike: function() {
+        getLike: function() {
             axios.get(`http://localhost:3000/api/post/${this.$props.post.idPost}`,
             {
              headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("token")
                               
             }
-         }).then((data) => {
-             console.log(data.data.result.liked);
-                  this.liked = data.data.result.liked;         
-                    
+         }).then((data) => { 
+             this.likes = data.data.likes;
+                                          
         }) .catch((error) => {console.log(error)})
         },
        sendLike: function() {
@@ -100,8 +97,10 @@ import axios from 'axios'
                 'Authorization': 'Bearer ' + localStorage.getItem("token")
                               
             }
-         }).then(() => {
-             location.reload()
+         }).then((data) => {
+             console.log(data.data)
+               this.getLike();
+                       
                                 
         }) .catch((error) => {if (error.response.status === 401) {
                   localStorage.clear();
@@ -142,7 +141,6 @@ import axios from 'axios'
                 .then((data) => {
                         this.comments = data.data;
                         this.numberOfComments = data.data.length;
-                        console.log(data.data.length)
                     
                 })
                .catch((error) => {if (error.response.status === 401) {
@@ -185,7 +183,7 @@ import axios from 'axios'
 },
     mounted() {
         this.getCommentsList();
-        this.getlike();
+        this.getLike();
     }
     }
 
@@ -249,8 +247,9 @@ import axios from 'axios'
     .fade-enter, .fade-leave-to{
     opacity: 0;
     }
-    .icon-liked {
-        color: blue
+    .icon-heart {
+        color: orange;
+        background-color: white;
     }
     .comment-block, .comment-block > *, .send-comment-block > * {
         background-color: white;
@@ -306,9 +305,6 @@ import axios from 'axios'
         font-size: 0.9em;
         color: grey;
         background-color: white;
-    }
-    #red-heart {
-        color: red
     }
     .user-comment {
         font-weight: bold;

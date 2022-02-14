@@ -76,4 +76,15 @@ import router from "../router";
         border-radius: 15px;
         box-shadow: 0 4px 2px -2px rgb(173, 173, 173);
     }
+    @media screen and (max-width: 750px) {
+  .nav-block {
+      width: 80%;
+  }
+}
+     @media screen and (max-width: 350px) {
+  .nav-block {
+      width: 100%;
+      height: auto;
+  }
+}
 </style>

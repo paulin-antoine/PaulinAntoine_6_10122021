@@ -40,20 +40,20 @@ exports.incrementId = (req, res, next) => {
 
   database
     .query(
-      `SELECT * FROM crud.liked WHERE idPost=${postID} AND idusers=${actualUser}`
+      `SELECT * FROM crud.like WHERE idPost=${postID} AND idusers=${actualUser}`
     )
     .then((result) => {
       if (!result[0][0]) {
         database
           .query(
-            `INSERT INTO crud.liked (idPost, idusers, liked) VALUES (${postID},${actualUser}, 1)`
+            `INSERT INTO crud.like (idPost, idusers, liked) VALUES (${postID},${actualUser}, 1)`
           )
           .then(() => {database
           .query(
             `UPDATE crud.post SET likes = likes + 1 WHERE idPost=${postID}`
           )
           .then(() =>
-            res.status(201).json({message: "like incrémenté"})
+            res.status(201).json({message: "like incrémenté", liked: 1})
           )
           .catch((error) => res.status(400).json({ error }));})
           
@@ -62,14 +62,14 @@ exports.incrementId = (req, res, next) => {
       } else if (result[0][0].idPost == postID && result[0][0].liked == 1) {
         database
           .query(
-            `UPDATE crud.liked SET liked = 0 WHERE idPost=${postID} AND idusers=${actualUser}`
+            `UPDATE crud.like SET liked = 0 WHERE idPost=${postID} AND idusers=${actualUser}`
           )
           .then(() =>{database
           .query(
             `UPDATE crud.post SET likes = likes - 1 WHERE idPost=${postID}`
           )
           .then(() => 
-            res.status(201).json({ message: " like décrémenté" })
+            res.status(201).json({ message: " like décrémenté", liked: 0 })
           )
           .catch((error) => res.status(400).json({ error }));})
           
@@ -77,14 +77,14 @@ exports.incrementId = (req, res, next) => {
       } else {
         database
           .query(
-            `UPDATE crud.liked SET liked = 1 WHERE idPost=${postID} AND idusers=${actualUser}`
+            `UPDATE crud.like SET liked = 1 WHERE idPost=${postID} AND idusers=${actualUser}`
           )
           .then(() => {database
             .query(
               `UPDATE crud.post SET likes = likes + 1 WHERE idPost=${postID}`
             )
             .then(() =>
-              res.status(201).json({ message: "likes incrémentés" })
+              res.status(201).json({ message: "likes incrémentés", liked: 1 })
             )
             .catch((error) => res.status(400).json({ error }));})
           
@@ -133,6 +133,7 @@ exports.deletePost = (req, res, next) => {
 exports.getLike = (req, res, next) => {
   const postId = req.params["idPost"];
   database
-    .query(`SELECT * FROM crud.liked WHERE idPost=${postId}`)
-    .then((result) => res.status(200).json({ result: result[0][0]}))
-}
+    database.query(`SELECT likes FROM crud.post WHERE idPost=${postId}`)
+    .then((result) => {likes = result[0][0].likes; console.log(result[0][0].likes); res.status(200).json({likes})})
+    .catch((error) => res.status(400).json({error}))
+  }
