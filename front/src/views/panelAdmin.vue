@@ -4,6 +4,7 @@
       <div v-for="user in users" :key="user.idusers" class="user">
           <p>ID: {{user.idusers}} {{user.firstname}} {{user.lastname}}</p>
            <button v-on:click="deleteUser(user.idusers)" id="user-btn">Supprimer</button>
+           <button v-on:click="deleteUser(user.idusers)" id="user-btn-2">X</button>          
       </div><br>
       {{message}}
     </div>
@@ -85,21 +86,55 @@ export default {
 .user {
   display: flex;
   justify-content: space-between;
+  text-align: left;
   width: 90%;
-  height: 20px;
+  min-height: 20px;
+  height: auto;
   margin: auto;
   margin-bottom: 7px;
   border: solid grey 1px;
   background-color: white;
 }
-#user-btn {
+#user-btn, #user-btn-2 {
   font-size: 0.9em;
   color: white;
-  height: 100%;
+  height: auto;
   background: linear-gradient(#ffa888, #ff733c ) ;
   border: none;
   border-bottom: solid #a73f16 2px;
   box-shadow: 0 4px 2px -2px rgb(173, 173, 173);
   cursor: pointer;
 }
+#user-btn-2 {
+  display: none;
+  background-color: white;
+}
+@media screen and (max-width: 1050px) {
+    .user-list {
+        width: 70%; 
+    }
+    }
+    @media screen and (max-width: 700px) {
+    .user-list {
+        width: 85%; 
+    }
+    .user {
+        width: 90%;
+    }
+    }
+    @media screen and (max-width: 400px) {
+    .user-list {
+        width: 100%; 
+    }
+    .user {
+        width: 90%;
+    }
+    #user-btn {
+    display: none;
+    }
+    #user-btn-2 {
+    display: block;
+    height: auto;
+}
+    }
 </style>
