@@ -113,6 +113,7 @@ export default {
 <style lang="css">
 #forms {
   padding: 10px;
+  margin-top: 30px;
   background-color: white ;
   box-shadow: 0 6px 5px -2px rgb(15, 2, 56);
 }

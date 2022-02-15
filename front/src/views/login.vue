@@ -1,6 +1,6 @@
 <template>
 <div id="login-block">
-    <h1 id="h1-login" >Connectez-vous</h1>
+    <h1 id="h1-login" >Connexion</h1>
     <div id="login-form">   
         <label>Email</label>
             <input class="login-input" id="login-input-mail" type="mail" v-model="email" required><br>

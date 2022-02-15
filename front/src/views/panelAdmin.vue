@@ -2,7 +2,7 @@
     <div class="user-list">
       <h1 id="h1-user">Liste des utilisateurs</h1>
       <div v-for="user in users" :key="user.idusers" class="user">
-          ID: {{user.idusers}} {{user.firstname}} {{user.lastname}}
+          <p>ID: {{user.idusers}} {{user.firstname}} {{user.lastname}}</p>
            <button v-on:click="deleteUser(user.idusers)" id="user-btn">Supprimer</button>
       </div><br>
       {{message}}

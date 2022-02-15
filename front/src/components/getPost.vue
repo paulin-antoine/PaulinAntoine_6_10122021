@@ -17,7 +17,7 @@
             </div>
             <div class="content-zone">
                 <p class="text">{{post.message}}</p>
-                <img :src="post.picturePost" class="picture-post-2">
+                <img v-if="post.picturePost" :src="post.picturePost" class="picture-post-2" >
                 <div class="date">Posté le {{post.datePost}}</div>
             </div>
             <div class="comment-like-zone">
@@ -33,11 +33,10 @@
                 <transition name="fade">
                     <div v-if="show" class="comment-block">
                         <div id="key" v-for="comment in comments" :key="comment.idcomments">
-                        <div class="comment-message-block">                            
-                            <p class="user-comment">{{comment.firstname}} {{comment.lastname}}&nbsp;
-                                <span v-if="admin == 1" class="trash-2"><a class="trash-2" v-on:click="deleteComment(comment.idcomments)"><fa class="trash-2" icon="trash-alt" /></a></span>
-                                <span v-else-if="actualUser == comment.idusers" class="trash-2"><a class="trash-2" v-on:click="deleteComment(comment.idcomments)"><fa class="trash-2" icon="trash-alt" /></a></span>
-                            </p>
+                        <div class="comment-message-block">
+                            <div v-if="admin == 1" class="trash-2-box"><a class="trash-2" v-on:click="deleteComment(comment.idcomments)"><fa class="trash-2" icon="trash-alt" /></a></div>
+                            <div v-else-if="actualUser == comment.idusers" class="trash-2-box"><a class="trash-2" v-on:click="deleteComment(comment.idcomments)"><fa class="trash-2" icon="trash-alt" /></a></div>                            
+                            <p class="user-comment">{{comment.firstname}} {{comment.lastname}}&nbsp;</p>    
                             <p id="comment-message">{{comment.message}}</p>
                         </div><br>
                         </div>
@@ -218,9 +217,13 @@ import axios from 'axios'
         background-color: white;
     }
     .picture-post-2 {
-        max-width: 25%;
-        margin-left: -67%;
-        margin: 15px 0 15px -67%;
+        display:block;
+        margin-left: 10px;
+        padding-left: 20px;
+        height: 200px;
+        max-width: 400px;       
+        margin: 15px 0 30px 0;
+        background-color: white;
     }
     .comment-like-zone {
         min-height: 30px;
@@ -271,7 +274,7 @@ import axios from 'axios'
     }
     .input-comment{
         width: 85%;
-        border: none;   
+         border: none;
     }
     #profile-picture-post-box {
         display: flex;
@@ -293,13 +296,13 @@ import axios from 'axios'
     }
     .text {
         width: auto;
-        width: 70%;
+        width: 65%;
         text-align: left;
-        margin: 10px 0 0 4%;
+        margin: 10px 0 30px 4%;
     }
     .date {
         position: absolute;
-        bottom: 2px;
+        bottom: -30px;
         right: 4px;
         font-style: italic;
         font-size: 0.9em;
@@ -327,9 +330,16 @@ import axios from 'axios'
     .trash-2 {
         background-color: rgb(214, 222, 245);
     }
+    .trash-2-box {
+        width: 20px;
+        position: absolute;
+        right: 6px;
+        top: 6px;
+    }
     .comment-message-block {
         display: inline-block;
         align-self: flex-start;
+        position: relative;
         margin: 10px 0 0 10px;
         border: solid rgb(191, 198, 231) 1px;
         border-radius: 20px;
@@ -348,4 +358,33 @@ import axios from 'axios'
     .icon-comment:hover {
         transform: scale(1.3);
     }
+    @media screen and (max-width: 420px) {
+    #output {
+        width: 90%;   
+    }
+    }
+    @media screen and (max-width: 550px) {
+    .picture-post-2 {
+        height: 150px;  
+        max-width: 300px; 
+    }
+    }
+     @media screen and (max-width: 420px) {
+    .send-comment-block {
+        width: 90%;   
+    }
+    .input-comment {
+        width: 70%;
+          
+    }
+    .picture-post-2 {
+        height: 120px;
+        max-width: 240px;
+    }
+    }
+    
+   
+
+    
+
 </style>

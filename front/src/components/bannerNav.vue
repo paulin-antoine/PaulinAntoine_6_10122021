@@ -27,6 +27,8 @@ export default {
         justify-content: space-around;
         width: 300px;
         height: 50px;
+        margin: auto;
+        margin-top: 50px;
         background-color: white;
         border-radius: 10px;
         box-shadow: 0 6px 5px -2px rgb(15, 2, 56);
@@ -46,5 +48,9 @@ export default {
         color: #2D137B;
         background-color: white;
     }
-
+    @media screen and (max-width: 350px) {
+    .icons-block {
+      width: 240px;
+    }
+    }
 </style>

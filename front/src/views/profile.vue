@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="nav-component">
+    <div>
         <bannerNav />
     </div>
     <div id="profil-box">
@@ -27,11 +27,7 @@ export default {
 </script>
 
 <style lang="css">
-    .nav-component{
-        width: 300px;
-        margin: auto;
-        margin-top: 50px;  
-    }
+    
     #profile-box {
         width: 200px;
         height: 500px;

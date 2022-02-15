@@ -39,15 +39,16 @@ export default {
         right: 20px;
         margin-top: 3%;
     }
-     @media screen and (max-width: 350px) {
-  .logo {
-      height: 40px;
-      margin-top: 30px;
-  }
-}
+     
     @media screen and (max-width: 670px) {
-  .logo {
+    .logo {
       margin-top: 30px;
   }
     } 
+    @media screen and (max-width: 350px) {
+    .logo {
+      height: 35px;
+      margin-top: 35px;
+  }
+}
 </style>

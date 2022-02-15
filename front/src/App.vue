@@ -35,10 +35,11 @@ h1, p, a {
         background-color: white;
         
   }
-p, h1 {
+p, h1, label {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 a {
   text-decoration: none;
 }
+
 </style>

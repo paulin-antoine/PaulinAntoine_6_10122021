@@ -1,8 +1,8 @@
 <template>
 <div class="block">
-    <div class="nav-component">
-        <bannerNav />
-    </div>
+    <div>
+        <bannerNav />  
+    </div> 
     <div class="post-block">
         <sendPost />
     </div>
@@ -66,22 +66,27 @@ export default {
 
 <style lang="css">
     .block {
-        width: 50%;
+        width: 60%;
         margin: auto;
         padding-bottom: 20px;
     }
-    .nav-component {
-        margin-top: 50px;  
-    }
-    .post-block {
-        margin-top: 20px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
     .get-post {
         margin: auto;
+        height: auto;
         margin-top: 20px;
         padding-top: 5px;
         padding-bottom: 5px;
     }
+    @media screen and (max-width: 900px) {
+  .block {
+      width: 80%;
+  }
+    }
+    @media screen and (max-width: 350px) {
+  .block {
+      width: 100%;
+  }
+  
+    }
+    
 </style>
