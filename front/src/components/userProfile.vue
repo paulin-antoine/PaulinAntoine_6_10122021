@@ -128,4 +128,14 @@ export default {
         border: none;
         background-color: transparent;
     }
+    @media screen and (max-width: 1050px) {
+    .profile-picture-box {
+        width: 75%; 
+    }
+    }
+    @media screen and (max-width: 450px) {
+    .profile-picture-box {
+        width: 100%; 
+    }
+    }
 </style>

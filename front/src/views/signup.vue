@@ -147,4 +147,25 @@
         box-shadow: 0 4px 2px -2px rgb(173, 173, 173);
         cursor: pointer;
     }
+    @media screen and (max-width: 1050px) {
+    #signup-block {
+        width: 70%; 
+    }
+    }
+    @media screen and (max-width: 700px) {
+    #signup-block {
+        width: 85%; 
+    }
+    #signup-form {
+        width: 70%;
+    }
+    }
+    @media screen and (max-width: 350px) {
+    #signup-block {
+        width: 100%; 
+    }
+    #signup-form {
+        width: 80%;
+    }
+    }
 </style>

@@ -368,6 +368,11 @@ import axios from 'axios'
         height: 150px;  
         max-width: 300px; 
     }
+    .comment-message-block {
+        max-width: 80%;
+        min-width: 70%;
+        padding-right: 20px;      
+    }
     }
      @media screen and (max-width: 420px) {
     .send-comment-block {

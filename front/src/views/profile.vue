@@ -3,7 +3,7 @@
     <div>
         <bannerNav />
     </div>
-    <div id="profil-box">
+    <div>
     <userProfile />
     <userInfo />
     </div>
@@ -28,10 +28,5 @@ export default {
 
 <style lang="css">
     
-    #profile-box {
-        width: 200px;
-        height: 500px;
-        border: solid black 2px;
-    }
-  
+
 </style>

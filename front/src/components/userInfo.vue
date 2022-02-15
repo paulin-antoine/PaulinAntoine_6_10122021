@@ -144,4 +144,24 @@ export default {
         box-shadow: 0 4px 2px -2px rgb(173, 173, 173);
         cursor: pointer;
     }
+    @media screen and (max-width: 1050px) {
+    #user-info {
+        width: 75%; 
+    }
+    }
+    @media screen and (max-width: 700px) {
+    #form-profile {
+        width: 80%; 
+    }
+    }
+    @media screen and (max-width: 450px) {
+    #user-info {
+        width: 100%; 
+    }
+    }@media screen and (max-width: 300px) {
+    #form-profile {
+        width: 95%; 
+    }
+    }
+
 </style>
