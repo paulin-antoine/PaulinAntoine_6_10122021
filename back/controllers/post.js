@@ -15,7 +15,6 @@ exports.post = (req, res, next) => {
       `INSERT INTO crud.post (idusers, message, datePost) VALUES (${Post.idusers},"${Post.message}",'${Post.datePost}')`
     )
     .then((result) => {
-      console.log(result[0].insertId);
       return res
         .status(201)
         .json({ message: "post créé", idPost: result[0].insertId });
@@ -143,6 +142,6 @@ exports.getLike = (req, res, next) => {
   const postId = req.params["idPost"];
   database
     database.query(`SELECT likes FROM crud.post WHERE idPost=${postId}`)
-    .then((result) => {likes = result[0][0].likes; console.log(result[0][0].likes); res.status(200).json({likes})})
+    .then((result) => {likes = result[0][0].likes; res.status(200).json({likes})})
     .catch((error) => res.status(400).json({error}))
   }
