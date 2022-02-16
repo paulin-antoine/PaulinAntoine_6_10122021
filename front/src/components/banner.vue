@@ -38,6 +38,8 @@ export default {
         position: absolute;
         right: 20px;
         margin-top: 3%;
+        cursor: pointer;
+        border: solid rgb(5, 5, 5) 2px;
     }
      
     @media screen and (max-width: 670px) {

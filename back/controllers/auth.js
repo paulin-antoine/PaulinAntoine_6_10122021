@@ -1,12 +1,16 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const emailValidation = require("email-validator");
-const authMiddleware = require("../middleware/auth.js");
 require("dotenv").config();
 const User = require("../models/User.js");
 const database = require("../db/db.js");
 
 exports.signup = (req, res, next) => {
+  if (!emailValidation.validate(req.body.email)) {
+    return res
+      .status(403)
+      .json({ message: "Le format email n'est pas valide !" });
+  };
   if (req.body.password.length > 6) {
     bcrypt
       .hash(req.body.password, 10)
@@ -20,7 +24,7 @@ exports.signup = (req, res, next) => {
         );
         database
           .query("INSERT INTO users SET ?", user)
-          .then((result) => {
+          .then(() => {
             return res.status(201).json({ message: "Utilisateur créé" });
           })
           .catch((error) => res.status(500).json({ error }));

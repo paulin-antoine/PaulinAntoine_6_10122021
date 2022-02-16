@@ -1,21 +1,20 @@
 <template>
-<div class="#app">
-  <banner />  
-  <bannerNav />
-  <router-view />
-</div>
+  <div class="#app">
+    <banner />
+    <bannerNav />
+    <router-view />
+  </div>
 </template>
 
 <script>
-
-import banner from "@/components/banner.vue"
+import banner from "@/components/banner.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-      banner,
-  }
-}
+    banner,
+  },
+};
 </script>
 
 <style>
@@ -27,19 +26,25 @@ html {
   margin: 0;
   width: 100%;
 }
-#app{
+#app {
   width: 100%;
   text-align: center;
-}  
-h1, p, a {
-        background-color: white;
-        
-  }
-p, h1, label {
+}
+h1,
+p,
+a {
+  background-color: white;
+}
+p,
+h1,
+label {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 a {
   text-decoration: none;
 }
-
+input::placeholder {
+  color: rgb(184, 184, 184);
+  font-style: italic;
+}
 </style>

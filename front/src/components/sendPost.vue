@@ -2,7 +2,7 @@
   <div id="forms">
     <form class="post-form">
       <label for="post-area" class="post-area"><p>Publiez quelque-chose</p></label><br/>
-      <input name="post-area" class="area" required v-model="post">
+      <input name="post-area" class="area" placeholder="placez ici votre message..." required v-model="post">
       <br />
     </form>
     <form id="picture-form">

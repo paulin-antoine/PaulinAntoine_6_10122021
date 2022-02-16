@@ -1,18 +1,21 @@
 <template>
-    <div class="user-list">
-      <h1 id="h1-user">Liste des utilisateurs</h1>
-      <div v-for="user in users" :key="user.idusers" class="user">
-          <p>ID: {{user.idusers}} {{user.firstname}} {{user.lastname}}</p>
-           <button v-on:click="deleteUser(user.idusers)" id="user-btn">Supprimer</button>
-           <button v-on:click="deleteUser(user.idusers)" id="user-btn-2">X</button>          
-      </div><br>
-      {{message}}
+  <div class="user-list">
+    <h1 id="h1-user">Liste des utilisateurs</h1>
+    <div v-for="user in users" :key="user.idusers" class="user">
+      <p>ID: {{ user.idusers }} {{ user.firstname }} {{ user.lastname }}</p>
+      <button v-on:click="deleteUser(user.idusers)" id="user-btn">
+        Supprimer
+      </button>
+      <button v-on:click="deleteUser(user.idusers)" id="user-btn-2">X</button>
     </div>
+    <br />
+    <p id="delete-message">{{ message }}</p>
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
-export default {   
+import axios from "axios";
+export default {
   name: "panelAdmin",
   components: {},
   data() {
@@ -22,48 +25,55 @@ export default {
     };
   },
   mounted() {
-      this.getAllUsers();
+    this.getAllUsers();
   },
   methods: {
-      
+    //Récupère la liste de tout les utilisateurs
     getAllUsers: function () {
-        let admin = localStorage.getItem("isAdmin");
+      let admin = localStorage.getItem("isAdmin");
       axios
-        .get(`http://localhost:3000/api/admin/${admin}`, 
-        
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        })
+        .get(
+          `http://localhost:3000/api/admin/${admin}`,
+
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        )
         .then((data) => {
           this.users = data.data;
-          console.log(data.data);
         })
-         .catch((error) => {if (error.response.status === 401) {
-                  localStorage.clear();
-                  this.$router.push('/');
-             }})
+        .catch((error) => {
+          if (error.response.status === 401) {
+            localStorage.clear();
+            this.$router.push("/");
+          }
+        });
     },
-    deleteUser: function(userID) {
-         axios
-        .delete(`http://localhost:3000/api/admin/${userID}`, 
-        
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        })
-        .then(() => {
+    //Supprime l'utilisateur séléctionné
+    deleteUser: function (userID) {
+      if (confirm("Voulez-vous vraiment supprimer l'utilisateur ?")) {
+        axios
+          .delete(`http://localhost:3000/api/admin/${userID}`, {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          })
+          .then(() => {
             this.message = "Utilisateur supprimé";
-           setTimeout((function() {window.location.reload();}), 1500);
- 
-        })
-         .catch((error) => {if (error.response.status === 401) {
-                  localStorage.clear();
-                  this.$router.push('/');
-             }})
-    }
+            setTimeout(function () {
+              window.location.reload();
+            }, 1500);
+          })
+          .catch((error) => {
+            if (error.response.status === 401) {
+              localStorage.clear();
+              this.$router.push("/");
+            }
+          });
+      }
+    },
   },
 };
 </script>
@@ -95,11 +105,12 @@ export default {
   border: solid grey 1px;
   background-color: white;
 }
-#user-btn, #user-btn-2 {
+#user-btn,
+#user-btn-2 {
   font-size: 0.9em;
   color: white;
   height: auto;
-  background: linear-gradient(#ffa888, #ff733c ) ;
+  background: linear-gradient(#ffa888, #ff733c);
   border: none;
   border-bottom: solid #a73f16 2px;
   box-shadow: 0 4px 2px -2px rgb(173, 173, 173);
@@ -109,32 +120,36 @@ export default {
   display: none;
   background-color: white;
 }
+#delete-message {
+  color: green;
+  padding-bottom: 20px;
+}
 @media screen and (max-width: 1050px) {
-    .user-list {
-        width: 70%; 
-    }
-    }
-    @media screen and (max-width: 700px) {
-    .user-list {
-        width: 85%; 
-    }
-    .user {
-        width: 90%;
-    }
-    }
-    @media screen and (max-width: 400px) {
-    .user-list {
-        width: 100%; 
-    }
-    .user {
-        width: 90%;
-    }
-    #user-btn {
+  .user-list {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 700px) {
+  .user-list {
+    width: 85%;
+  }
+  .user {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .user-list {
+    width: 100%;
+  }
+  .user {
+    width: 90%;
+  }
+  #user-btn {
     display: none;
-    }
-    #user-btn-2 {
+  }
+  #user-btn-2 {
     display: block;
     height: auto;
+  }
 }
-    }
 </style>

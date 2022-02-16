@@ -1,32 +1,26 @@
 <template>
-<div>
+  <div>
     <div>
-        <bannerNav />
+      <bannerNav />
     </div>
     <div>
-    <userProfile />
-    <userInfo />
+      <userProfile />
+      <userInfo />
     </div>
-</div>
+  </div>
 </template>
 
 <script>
-import userProfile from '@/components/userProfile.vue'
-import bannerNav from '@/components/bannerNav.vue'
-import userInfo from '@/components/userInfo.vue'
-
+import userProfile from "@/components/userProfile.vue";
+import bannerNav from "@/components/bannerNav.vue";
+import userInfo from "@/components/userInfo.vue";
 
 export default {
-    name: "profile",
-    components: {
-        bannerNav,
-        userProfile,
-        userInfo    
-    }
-}
+  name: "profile",
+  components: {
+    bannerNav,
+    userProfile,
+    userInfo,
+  },
+};
 </script>
-
-<style lang="css">
-    
-
-</style>
