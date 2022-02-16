@@ -8,8 +8,6 @@ const postRoutes = require("./routes/post.js");
 const userRoutes = require("./routes/user.js");
 const commentsRoutes = require("./routes/comments.js");
 const adminRoutes = require("./routes/admin.js");
-//const Db = require("./db/db.js");
-
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");

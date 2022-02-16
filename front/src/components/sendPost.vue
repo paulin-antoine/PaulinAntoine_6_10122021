@@ -1,12 +1,20 @@
 <template>
   <div id="forms">
     <form class="post-form">
-      <label for="post-area" class="post-area"><p>Publiez quelque-chose</p></label><br/>
-      <input name="post-area" class="area" placeholder="placez ici votre message..." required v-model="post">
+      <label for="post-area" class="post-area"
+        ><p>Publiez quelque-chose</p></label
+      ><br />
+      <input
+        name="post-area"
+        class="area"
+        placeholder="placez ici votre message..."
+        required
+        v-model="post"
+      />
       <br />
     </form>
     <form id="picture-form">
-      <img id="output" /><br>
+      <img id="output" /><br />
       <input
         v-on:change="displayPicture"
         type="file"
@@ -15,14 +23,21 @@
         name="image"
         id="picture-post"
       />
-      <label for="picture-post" class="picture-post-label">ajouter une image</label>
-      <button v-if="display == true" v-on:click="reload" id="revert">annuler</button>    
+      <label for="picture-post" class="picture-post-label"
+        >ajouter une image</label
+      >
+      <button v-if="display == true" v-on:click="reload" id="revert">
+        annuler
+      </button>
     </form>
-    <button id="submit-btn" type="submit" v-on:click="postMessage">publier</button>
+    <button id="submit-btn" type="submit" v-on:click="postMessage">
+      publier
+    </button>
   </div>
 </template>
 <script>
 import axios from "axios";
+
 export default {
   name: "sendPost",
   data() {
@@ -36,6 +51,7 @@ export default {
   },
 
   methods: {
+    //Affiche l'image séléctionnée par l'utilisateur dans ses fichiers
     displayPicture: function (event) {
       var reader = new FileReader();
       var myForm = document.getElementById("picture-form");
@@ -50,9 +66,10 @@ export default {
       reader.readAsDataURL(event.target.files[0]);
       this.display = true;
     },
-    reload: function() {
+    reload: function () {
       location.reload();
     },
+    //Envoi du post (texte) dans la base de donnée
     postMessage: function () {
       let idusers = localStorage.getItem("userId");
       let date = new Date();
@@ -68,7 +85,6 @@ export default {
         date.getMinutes();
       var myForm = document.getElementById("picture-form");
       const formData = new FormData(myForm);
-      //formData.append("image", this.file);
 
       axios
         .post(
@@ -85,26 +101,34 @@ export default {
               "content-Type": "application/json",
             },
           }
-        )
+        ) //Envoi du post (image) dans la base de donnée
         .then((res) => {
           if (this.file != "") {
-            axios.put(
-              `http://localhost:3000/api/post/${res.data.idPost}`,
-              formData,
-              {
-                headers: {
-                  Authorization: "Bearer " + localStorage.getItem("token"),
-                },
-              }
-            ).then(() => {alert("image ajouté")})
-            .catch((error) => {console.log(error)});
-            
-          }location.reload();
+            axios
+              .put(
+                `http://localhost:3000/api/post/${res.data.idPost}`,
+                formData,
+                {
+                  headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                  },
+                }
+              )
+              .then(() => {
+                alert("image ajoutée");
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+          location.reload();
         })
-         .catch((error) => {if (error.response.status === 401) {
-                  localStorage.clear();
-                  this.$router.push('/');
-             }})
+        .catch((error) => {
+          if (error.response.status === 401) {
+            localStorage.clear();
+            this.$router.push("/");
+          }
+        });
     },
   },
 };
@@ -114,7 +138,7 @@ export default {
 #forms {
   padding: 10px;
   margin-top: 30px;
-  background-color: white ;
+  background-color: white;
   box-shadow: 0 6px 5px -2px rgb(15, 2, 56);
 }
 .post-form {
@@ -142,7 +166,7 @@ export default {
   font-size: 1.2em;
   margin-top: 50px;
   color: white;
-  background: linear-gradient(#ffa888, #ff733c ) ;
+  background: linear-gradient(#ffa888, #ff733c);
   border: none;
   border-bottom: solid #a73f16 2px;
   border-radius: 10px;
@@ -155,7 +179,7 @@ export default {
   color: white;
   margin-top: 5px;
   cursor: pointer;
-  background: linear-gradient(#acacac, #616161 ) ;
+  background: linear-gradient(#acacac, #616161);
   border: none;
   border-bottom: solid #303030 2px;
   border-radius: 10px;
@@ -194,7 +218,7 @@ export default {
   color: white;
   cursor: pointer;
   border-radius: 10px;
-  background: linear-gradient(#9894d1, #634a9c ) ;
+  background: linear-gradient(#9894d1, #634a9c);
   border-bottom: solid #39196b 2px;
 }
 #output {
@@ -215,7 +239,9 @@ export default {
   width: 90%;
   margin: auto;
 }
-#submit-btn, #revert, .picture-post-label {
+#submit-btn,
+#revert,
+.picture-post-label {
   box-shadow: 0 4px 2px -2px rgb(189, 189, 189);
 }
 </style>

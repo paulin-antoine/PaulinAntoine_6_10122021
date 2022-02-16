@@ -1,4 +1,3 @@
-const database = require("../db/db.js");
 
 module.exports = class Post {
     constructor(idPost, idusers, message, picturePost, datePost){

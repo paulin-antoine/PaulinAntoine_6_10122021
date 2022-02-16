@@ -10,5 +10,4 @@ router.put('/:id', auth, userCtrl.updateInfo);
 router.delete('/:id', auth, userCtrl.deleteProfile);
 router.get('/:id', auth, userCtrl.getUserInfo);
 
-
 module.exports = router;

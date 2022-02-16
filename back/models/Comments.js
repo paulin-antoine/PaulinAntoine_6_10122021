@@ -1,4 +1,3 @@
-const database = require("../db/db.js");
 
 module.exports = class Comment {
     constructor(idcomments, idPost, message, idusers){

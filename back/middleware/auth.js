@@ -2,8 +2,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 var secretKey = process.env.SECRET_KEY;
- 
-
   
 //Implémentation du token unique à chaque utilisateur.
 module.exports = (req, res, next) => {

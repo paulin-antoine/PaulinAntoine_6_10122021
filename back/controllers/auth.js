@@ -5,12 +5,15 @@ require("dotenv").config();
 const User = require("../models/User.js");
 const database = require("../db/db.js");
 
+//Créé un utilisateur si l'email n'existe pas dans la base de donnée
 exports.signup = (req, res, next) => {
+  //Validation du format de l'adresse mail
   if (!emailValidation.validate(req.body.email)) {
     return res
       .status(403)
       .json({ message: "Le format email n'est pas valide !" });
   };
+  //Validation du format et hashage du mot de passe
   if (req.body.password.length > 6) {
     bcrypt
       .hash(req.body.password, 10)
@@ -38,6 +41,7 @@ exports.signup = (req, res, next) => {
 
 };
 
+//Comparaison du mot de passe et de l'adresse mail
 exports.login = (req, res, next) => {
   database
     .query("SELECT idusers, pass, isAdmin FROM crud.users WHERE email=?", req.body.email)

@@ -2,6 +2,7 @@ const Post = require("../models/Post.js");
 const database = require("../db/db.js");
 const fs = require("fs");
 
+//Création d'un post avec l'id utilisateur et la date
 exports.post = (req, res, next) => {
   let Post = {
     idusers: req.body.idusers,
@@ -22,6 +23,7 @@ exports.post = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
+//Récupère toutes les informations de la table post et users
 exports.getPostsList = (req, res, next) => {
   database
     .query(
@@ -34,6 +36,9 @@ exports.getPostsList = (req, res, next) => {
       res.status(404).json({ message: "Soyez le premier à publier" })
     );
 };
+
+/*Incrémente où décrémente un like dans la table liked et un like dans le total
+des likes d'un post */
 exports.incrementId = (req, res, next) => {
   let postID = req.params["idPost"];
   let actualUser = req.body.actualUser;
@@ -94,6 +99,7 @@ exports.incrementId = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
+//Enregistre l'image séléctionné dans la table post
 exports.addPostImage = (req, res, next) => {
   const postId = req.params["insertId"];
   const image = `${req.protocol}://${req.get("host")}/images/${
@@ -108,6 +114,7 @@ exports.addPostImage = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
+//Supprime un post
 exports.deletePost = (req, res, next) => {
   const postId = req.params["idPost"];
   database
@@ -130,6 +137,8 @@ exports.deletePost = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
+
+//Récupère tout les likes d'un post
 exports.getLike = (req, res, next) => {
   const postId = req.params["idPost"];
   database

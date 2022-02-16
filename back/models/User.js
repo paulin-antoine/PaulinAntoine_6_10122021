@@ -1,4 +1,3 @@
-const database = require("../db/db.js");
 
 module.exports = class User {
     constructor(firstname, lastname, email, picturename, pass){

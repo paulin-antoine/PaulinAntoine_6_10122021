@@ -1,6 +1,7 @@
 const Comments = require("../models/Comments.js");
 const database = require("../db/db.js");
 
+//Envoi un commentaire texte dans la table comments
 exports.sendComment = (req, res, next) => {
   let Comments = {
     idcomments: null,
@@ -17,6 +18,8 @@ exports.sendComment = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
+
+//Récupère les commentaires d'un post séléctionné
 exports.getCommentsList = (req, res, next) => {
     idPost = req.params["idPost"]
   database
@@ -29,6 +32,7 @@ exports.getCommentsList = (req, res, next) => {
     .catch((error) => res.status(404).json({ error }));
 };
 
+//Supprime le commentaire séléctionné
 exports.deleteComment = (req, res, next) => {
   const commentId = req.params["idcomments"];
       database.query(`DELETE FROM crud.comments WHERE idcomments=${commentId}`)

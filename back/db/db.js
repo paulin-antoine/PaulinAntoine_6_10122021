@@ -1,7 +1,6 @@
 const mysql = require('mysql2');
 require("dotenv").config();
 
-
 const databasePass = process.env.DATABASE_PASS
 const database = mysql.createPool({
     host: 'localhost',
@@ -10,7 +9,6 @@ const database = mysql.createPool({
     password: `${databasePass}`
     
   });
-  
-   
+    
   module.exports = database.promise(console.log("Connexion DB"))
   

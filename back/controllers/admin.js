@@ -1,6 +1,7 @@
 const database = require("../db/db.js");
 const fs = require("fs");
 
+//Récupère la liste de tout les utilisateurs si l'utilisateur est admin
 exports.getAllUsers = (req, res, next) => {
     let admin = req.params['id'];
     if (admin == 1){
@@ -10,6 +11,7 @@ exports.getAllUsers = (req, res, next) => {
     }  
 }
 
+//Supprime l'utilisateur siéléctionné et retire l'image du système
 exports.deleteUser = (req, res, next) => {
     let userID = req.params["userID"]; 
     database.query(`SELECT pictureName FROM crud.users WHERE idusers=${userID}`)
