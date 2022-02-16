@@ -5,14 +5,14 @@ require("dotenv").config();
 const User = require("../models/User.js");
 const database = require("../db/db.js");
 
-//Créé un utilisateur si l'email n'existe pas dans la base de donnée
+//Créé un utilisateur dans la table users si l'utilisateur n'existe pas dans la table
 exports.signup = (req, res, next) => {
   //Validation du format de l'adresse mail
   if (!emailValidation.validate(req.body.email)) {
     return res
       .status(403)
       .json({ message: "Le format email n'est pas valide !" });
-  };
+  }
   //Validation du format et hashage du mot de passe
   if (req.body.password.length > 6) {
     bcrypt
@@ -38,19 +38,20 @@ exports.signup = (req, res, next) => {
       message: "Le mot de passe doit contenir au minimum 6 caractères",
     });
   }
-
 };
 
 //Comparaison du mot de passe et de l'adresse mail
 exports.login = (req, res, next) => {
   database
-    .query("SELECT idusers, pass, isAdmin FROM crud.users WHERE email=?", req.body.email)
+    .query(
+      "SELECT idusers, pass, isAdmin FROM crud.users WHERE email=?",
+      req.body.email
+    )
     .then((result) => {
       if (!result[0]) {
         return res.status(404).json({ message: "Utilisateur inconnu" });
-      } else { 
-        bcrypt.compare(req.body.password, result[0][0].pass)
-        .then((valid) => {
+      } else {
+        bcrypt.compare(req.body.password, result[0][0].pass).then((valid) => {
           if (!valid) {
             return res.status(401).json({ error: "Mot de passe non valide" });
           }
@@ -58,12 +59,13 @@ exports.login = (req, res, next) => {
             isAdmin: result[0][0].isAdmin,
             userId: result[0][0].idusers,
             token: jwt.sign(
-              {userId: result[0][0].idusers},
+              { userId: result[0][0].idusers },
               `${process.env.SECRET_KEY}`,
-              {expiresIn:"24h"},  
-            )
-          })
-        })
+              { expiresIn: "24h" }
+            ),
+          });
+        });
       }
-    }).catch(error => res.status(500).json(error));
+    })
+    .catch((error) => res.status(500).json(error));
 };
