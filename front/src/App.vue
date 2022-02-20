@@ -1,7 +1,6 @@
 <template>
   <div class="#app">
     <banner />
-    <bannerNav />
     <router-view />
   </div>
 </template>

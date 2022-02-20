@@ -52,47 +52,46 @@ exports.incrementId = (req, res, next) => {
           .query(
             `INSERT INTO crud.like (idPost, idusers, liked) VALUES (${postID},${actualUser}, 1)`
           )
-          .then(() => {database
-          .query(
-            `UPDATE crud.post SET likes = likes + 1 WHERE idPost=${postID}`
-          )
-          .then(() =>
-            res.status(201).json({message: "like incrémenté", liked: 1})
-          )
-          .catch((error) => res.status(400).json({ error }));})
-          
-        
-        
+          .then(() => {
+            database
+              .query(
+                `UPDATE crud.post SET likes = likes + 1 WHERE idPost=${postID}`
+              )
+              .then(() =>
+                res.status(201).json({ message: "like incrémenté", liked: 1 })
+              )
+              .catch((error) => res.status(400).json({ error }));
+          });
       } else if (result[0][0].idPost == postID && result[0][0].liked == 1) {
         database
           .query(
             `UPDATE crud.like SET liked = 0 WHERE idPost=${postID} AND idusers=${actualUser}`
           )
-          .then(() =>{database
-          .query(
-            `UPDATE crud.post SET likes = likes - 1 WHERE idPost=${postID}`
-          )
-          .then(() => 
-            res.status(201).json({ message: " like décrémenté", liked: 0 })
-          )
-          .catch((error) => res.status(400).json({ error }));})
-          
-        
+          .then(() => {
+            database
+              .query(
+                `UPDATE crud.post SET likes = likes - 1 WHERE idPost=${postID}`
+              )
+              .then(() =>
+                res.status(201).json({ message: " like décrémenté", liked: 0 })
+              )
+              .catch((error) => res.status(400).json({ error }));
+          });
       } else {
         database
           .query(
             `UPDATE crud.like SET liked = 1 WHERE idPost=${postID} AND idusers=${actualUser}`
           )
-          .then(() => {database
-            .query(
-              `UPDATE crud.post SET likes = likes + 1 WHERE idPost=${postID}`
-            )
-            .then(() =>
-              res.status(201).json({ message: "likes incrémentés", liked: 1 })
-            )
-            .catch((error) => res.status(400).json({ error }));})
-          
-        
+          .then(() => {
+            database
+              .query(
+                `UPDATE crud.post SET likes = likes + 1 WHERE idPost=${postID}`
+              )
+              .then(() =>
+                res.status(201).json({ message: "likes incrémentés", liked: 1 })
+              )
+              .catch((error) => res.status(400).json({ error }));
+          });
       }
     })
     .catch((error) => res.status(500).json({ error }));
@@ -141,7 +140,15 @@ exports.deletePost = (req, res, next) => {
 exports.getLike = (req, res, next) => {
   const postId = req.params["idPost"];
   database
-    database.query(`SELECT likes FROM crud.post WHERE idPost=${postId}`)
-    .then((result) => {likes = result[0][0].likes; res.status(200).json({likes})})
-    .catch((error) => res.status(400).json({error}))
-  }
+    .query(
+      `SELECT liked FROM crud.like WHERE idPost=${postId} and idusers=${req.userId}`
+    )
+    .then((result) => {
+      if (!result[0][0]) {
+        res.status(200).json({ liked: 0 });
+      } else {
+        res.status(200).json({ liked: result[0][0].liked });
+      }
+    })
+    .catch((error) => res.status(500).json({ message: error }));
+};

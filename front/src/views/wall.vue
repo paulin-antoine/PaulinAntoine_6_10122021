@@ -7,12 +7,7 @@
       <sendPost />
     </div>
     <!--Boucle pour afficher tout les posts-->
-    <div
-      v-for="post in posts"
-      :key="post.idPost"
-      :value="post.idPost"
-      class="get-post"
-    >
+    <div v-for="post in posts" :key="post.idPost" class="get-post">
       <getPost :post="post"> </getPost>
     </div>
   </div>

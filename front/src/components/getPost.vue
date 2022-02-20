@@ -39,13 +39,20 @@
         <div class="icons-box">
           <div class="icon-comment-zone">
             <a>
-              <fa
+              <fa v-if="this.liked === 0"
                 v-on:click="sendLike"
                 icon="heart"
                 id="heart"
                 class="icon-comment"
-            /></a>
-            <span class="icon-comment">&nbsp;{{ this.likes }}</span>
+            />
+              <fa v-if="this.liked === 1"
+                v-on:click="sendLike"
+                icon="heart"
+                id="heart"
+                class="red-heart"
+                />
+            </a>
+            <span class="icon-comment">&nbsp;{{ post.likes }}</span>
           </div>
           <div class="icon-comment-zone">
             {{ numberOfComments }}
@@ -112,7 +119,7 @@ export default {
   data() {
     return {
       show: false,
-      likes: "",
+      liked: "",
       comment: {
         message: "",
       },
@@ -127,7 +134,7 @@ export default {
   },
   methods: {
     //Récupère les likes de chaque post
-    getLike: function () {
+    getLike: function (isMounted) {
       axios
         .get(`http://localhost:3000/api/post/${this.$props.post.idPost}`, {
           headers: {
@@ -135,7 +142,15 @@ export default {
           },
         })
         .then((data) => {
-          this.likes = data.data.likes;
+          this.liked = data.data.liked;
+          console.log(isMounted)
+          if (!isMounted) {
+            if (this.liked === 0) {
+            this.$props.post.likes -= 1;
+          }else if (this.liked === 1) {
+            this.$props.post.likes += 1;
+          }
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -156,7 +171,8 @@ export default {
           }
         )
         .then(() => {
-          this.getLike();
+          this.getLike(false);
+          
         })
         .catch((error) => {
           if (error.response.status === 401) {
@@ -252,7 +268,7 @@ export default {
   },
   mounted() {
     this.getCommentsList();
-    this.getLike();
+    this.getLike(true);
   },
 };
 </script>
@@ -324,8 +340,8 @@ export default {
 .fade-leave-to {
   opacity: 0;
 }
-.icon-heart {
-  color: orange;
+.red-heart {
+  color: red;
   background-color: white;
 }
 .comment-block,
