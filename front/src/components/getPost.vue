@@ -342,6 +342,8 @@ export default {
 }
 .red-heart {
   color: red;
+  cursor: pointer;
+  transform: scale(1.3);
   background-color: white;
 }
 .comment-block,
@@ -403,7 +405,7 @@ export default {
 }
 .user-comment {
   font-weight: bold;
-  max-width: 90%;
+  max-width: 80%;
   font-size: 0.9em;
   text-align: left;
   margin: 10px 0 0 3px;
@@ -436,8 +438,9 @@ export default {
   border: solid rgb(191, 198, 231) 1px;
   border-radius: 20px;
   background-color: rgb(214, 222, 245);
+  width: auto;
   max-width: 60%;
-  min-width: 35%;
+  min-width: 30%;
   padding-bottom: 10px;
   box-shadow: 0 5px 7px -2px rgb(207, 207, 207);
 }
