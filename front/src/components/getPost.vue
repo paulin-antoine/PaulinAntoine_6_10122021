@@ -378,11 +378,12 @@ export default {
   height: 35px;
   margin: 2px;
   margin-top: 4px;
-  border: solid grey 1px;
   border-radius: 50%;
 }
 .profile-picture-post {
-  height: 37px;
+   min-height: 135%;
+  margin-top: -5px;
+  background-color: white;
 }
 .user-name-post {
   margin: auto;

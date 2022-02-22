@@ -124,11 +124,12 @@ export default {
   width: 120px;
   height: 120px;
   margin: auto;
-  border: solid silver 1px;
   border-radius: 50%;
+  background-color: white;
 }
 .profile-picture {
-  min-height: 135%; 
+  min-height: 135%;
+  margin-top: -20px;
   background-color: white;
 }
 #field {
