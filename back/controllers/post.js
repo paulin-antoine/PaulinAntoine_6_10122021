@@ -105,8 +105,7 @@ exports.addPostImage = (req, res, next) => {
   }`;
   database
     .query(`UPDATE crud.post SET picturePost='${image}' WHERE idPost=${postId}`)
-    .then((result) => {
-      console.log(result);
+    .then(() => { 
       res.status(201).json({ message: "image ajoutée" });
     })
     .catch((error) => res.status(500).json({ error }));

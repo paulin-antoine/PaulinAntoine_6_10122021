@@ -30,10 +30,9 @@ export default {
   methods: {
     //Récupère la liste de tout les utilisateurs
     getAllUsers: function () {
-      let admin = localStorage.getItem("isAdmin");
       axios
         .get(
-          `http://localhost:3000/api/admin/${admin}`,
+          "http://localhost:3000/api/admin",
 
           {
             headers: {
