@@ -1,21 +1,21 @@
 
 ## Voici les exigences émises par le comité de pilotage :
 
-La présentation des fonctionnalités doit être simple
-La création d'un compte doit être simple et possible depuis un téléphone mobile
-Le profil doit contenir très peu d'informations pour que sa complétion soit rapide
-La suppression du compte doit être possible
-l'accès à un forum où les salariés publient des contenus multimédias doivent être présents
-l'accès à un forum où les salariés publient des textes doivent être présents
-les utilisateurs doivent pouvoir facilement repérer les dernières participations des employés
-le ou la chargé-e de communication Groupomania doit pouvoir modérer les interactions entre salariés
+* La présentation des fonctionnalités doit être simple
+* La création d'un compte doit être simple et possible depuis un téléphone mobile
+* Le profil doit contenir très peu d'informations pour que sa complétion soit rapide
+* La suppression du compte doit être possible
+* l'accès à un forum où les salariés publient des contenus multimédias doivent être présents
+* l'accès à un forum où les salariés publient des textes doivent être présents
+* les utilisateurs doivent pouvoir facilement repérer les dernières participations des employés
+* le ou la chargé-e de communication Groupomania doit pouvoir modérer les interactions entre salariés
 
 ### Ce projet à été réalisé avec :
 
-Vue.js
-Express.js
-Node.js
-MySql (MySql-2)
+* Vue.js
+* Express.js
+* Node.js
+* MySql (MySql-2)
 
 ## Demarrage
 
@@ -76,4 +76,4 @@ Important: Déclarez une valeur de 1 dans la conne isAdmin pour le compte admini
 
 ## lancez le projet
 
-Se référer au README.md du front-end et du back-end
+Détails au README.md du front-end et du back-end.
