@@ -17,6 +17,12 @@
 * Node.js
 * MySql (MySql-2)
 
+### Langages utilisé:
+
+* html
+* css
+* javaScript
+
 ## Demarrage
 
 ### Installez un fichier .env (à la racine du dossier back) et inserez:
